@@ -12,7 +12,7 @@
 > for your dossier; leave the rest as the shared doctrine.
 
 ## What this project is
-The strategy room for **Dossier [NNN / short-name]: [ONE-LINE TOPIC]**.
+The strategy room for **Dossier QC-Landscape: Which quantum-computing modalities (superconducting, trapped-ion, neutral-atom, photonic, topological, silicon spin, etc.) have the most credible path to fault-tolerant, useful-scale computing — and how should each avenue's probability of success be labeled given current evidence?**.
 Connected repo: this synced repository. The dossier's three reading
 surfaces (interactive, self-explaining, audit trail), its manuscript, its
 verification script, and its claim ledger all live here.
@@ -124,7 +124,54 @@ Because this constitution is a repo file, upgrading it is just part of that
 same machinery sync — there is nothing separate to re-paste into the Project.
 
 ## Standing context (edit per dossier)
-- [List this dossier's open claims by ledger id.]
-- [List current open red-team findings.]
-- [Note anything a fresh session must know: the topic's sensitivities, the
-  key prior work, the boldest claims and exactly how they're labeled.]
+- **Open claims:** None formally entered yet — to be built during prior-art
+  recon. Anticipated structure: the ESTABLISHED bucket (demonstrated qubit
+  counts, coherence times, gate/readout fidelities, error-correction
+  milestones, peer-reviewed results from named groups, with their exact
+  measurement conditions) will be asserted with citations; the comparative and
+  predictive claims — which modality reaches fault tolerance first, the
+  probability of success per avenue/material, and the most promising candidate
+  — will be the central OPEN-UNVERIFIED claims, posted as forecasts with
+  explicit reasoning and the evidence that would settle them.
+- **Open red-team findings:** None yet — adversarial pass comes after the first
+  draft.
+- **Anything a fresh session must know:**
+  - **Framing discipline (critical):** This topic is routinely over-hyped, so
+    the format's credibility depends on labeling with total precision. State
+    demonstrated lab results plainly as ESTABLISHED with sources and their
+    exact conditions — qubit count, fidelity, and crucially whether the result
+    is a logical or physical qubit — that is bedrock, not speculation, and
+    soft-pedaling a real milestone into "alleged" is a mistake. But every
+    probability estimate, timeline, and "winner" call stays in the OPEN bucket,
+    hedged, framed as a forecast — that is what makes the dossier undismissable
+    rather than mockable. Truth in labeling cuts BOTH ways: never downgrade a
+    genuinely demonstrated result, and never assert a forecast as settled. That
+    symmetry IS the credibility.
+  - **Vendor material:** roadmaps, press releases, and "quantum advantage"
+    announcements are claims by interested parties, not established results
+    until independently reproduced or peer-reviewed. Label them as such and
+    flag them.
+  - **Forecast labeling:** every "probability of success" or "most promising"
+    judgment is an OPEN forecast — give the reasoning, a base rate or
+    comparable where possible, and the falsifiable signpost that would raise or
+    lower it (e.g. a logical qubit sustained below error rate X over Y cycles,
+    or a demonstrated below-threshold surface-code patch at scale Z).
+  - **Model to emulate:** bullish in analysis, conservative in labeling —
+    believe boldly about where the field is heading, but publish each claim
+    with a label a hostile referee cannot attack. Restraint as a weapon, not as
+    timidity.
+  - **Key prior work to map in recon:** peer-reviewed milestones and roadmaps
+    across modalities — superconducting (IBM, Google), trapped-ion (Quantinuum,
+    IonQ), neutral-atom (QuEra, Pasqal, Atom Computing), photonic (PsiQuantum,
+    Xanadu), topological (Microsoft), silicon spin (Intel and academic groups);
+    error-correction results (surface code, recent logical-qubit
+    demonstrations); and benchmarking standards (quantum volume, randomized
+    benchmarking, the threshold theorem). Distinguish physical vs logical qubits
+    everywhere — conflating them is the most common way this topic gets
+    misreported. Treat marketing-driven or unsourced claims as adjacent-at-best
+    and flag them.
+  - **The boldest claims and their labels:** "modality X has the highest
+    probability of reaching fault-tolerant, useful-scale QC" and any specific
+    timeline → OPEN-UNVERIFIED, posted as a forecast with stated assumptions and
+    falsifiable signposts. The publishable, defensible spine is the honest
+    separation of what has been demonstrated from what is being predicted.
