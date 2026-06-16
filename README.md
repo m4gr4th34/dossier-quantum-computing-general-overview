@@ -13,6 +13,8 @@ Rationale: lead with the live result for the skeptic, then GETTING-STARTED for t
 
 ▶ **[Read the self-explaining edition](https://m4gr4th34.github.io/dossier-quantum-computing-general-overview/paper.html)** · [Interactive edition](https://m4gr4th34.github.io/dossier-quantum-computing-general-overview/) · [Audit trail](https://m4gr4th34.github.io/dossier-quantum-computing-general-overview/dossier.html)
 
+🔍 **Prior-art reconnaissance (Phase 0 working map):** [docs/prior-art-recon.md](docs/prior-art-recon.md) (PDF: [docs/prior-art-recon.pdf](docs/prior-art-recon.pdf))
+
 ## Get started in an afternoon
 
 You got into science for the ideas — not for wrestling LaTeX, trimming to word limits, formatting bibliographies at 1 a.m., or waiting eight months on Reviewer 2. This deletes all of that.
