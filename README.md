@@ -13,7 +13,8 @@ Rationale: lead with the live result for the skeptic, then GETTING-STARTED for t
 
 ▶ **[Read the self-explaining edition](https://m4gr4th34.github.io/dossier-quantum-computing-general-overview/paper.html)** · [Interactive edition](https://m4gr4th34.github.io/dossier-quantum-computing-general-overview/) · [Audit trail](https://m4gr4th34.github.io/dossier-quantum-computing-general-overview/dossier.html)
 
-🔍 **Prior-art reconnaissance (Phase 0 working map):** [docs/prior-art-recon.md](docs/prior-art-recon.md) (PDF: [docs/prior-art-recon.pdf](docs/prior-art-recon.pdf))
+**Working materials** — Phase 0, pre-ladder (not finished editions):
+▶ **[Prior-art reconnaissance map](https://m4gr4th34.github.io/dossier-quantum-computing-general-overview/recon.html)** · <sub>[download PDF](https://m4gr4th34.github.io/dossier-quantum-computing-general-overview/docs/prior-art-recon.pdf)</sub>
 
 ## Get started in an afternoon
 

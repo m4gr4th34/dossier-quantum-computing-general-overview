@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Prior-Art Reconnaissance — Quantum Computing: A General Overview (Open Dossier)</title>
+<meta name="description" content="Phase 0 prior-art reconnaissance — a working map, not laddered claims. Pre-ladder working material for the Quantum Computing dossier.">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,600;0,800;1,400;1,600&family=IBM+Plex+Mono:wght@400;600&display=swap');
+  :root{
+    --ink:#101d26;--ink2:#42525c;--paper:#f6f8f9;--card:#ffffff;
+    --teal:#0e7c7b;--teal-soft:#e3f0f0;--coral:#e4572e;--violet:#6b4e9b;--violet-soft:#efe9f6;
+    --pass:#1e8e5a;--open:#b07d1f;--line:#d8e0e4;
+    --serif:'Spectral',Georgia,serif;
+    --mono:'IBM Plex Mono',ui-monospace,Menlo,Consolas,monospace;
+    --sans:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:17px;line-height:1.65}
+  .wrap{max-width:720px;margin:0 auto;padding:0 20px}
+  a{color:var(--teal)}
+  header{padding:54px 0 10px}
+  .eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink2)}
+  .eyebrow b{color:var(--coral)}
+  h1{font-family:var(--serif);font-weight:800;font-size:clamp(28px,5vw,42px);line-height:1.12;margin:.4em 0 .2em;letter-spacing:-.01em}
+  .byline{font-family:var(--serif);font-style:italic;color:var(--ink2);margin-bottom:18px}
+  .howto{background:var(--card);border:1.5px solid var(--ink);padding:14px 16px;font-size:15px;margin:18px 0 8px}
+  .howto .mono{font-family:var(--mono);font-size:13px}
+  h2{font-family:var(--serif);font-weight:600;font-size:27px;margin:48px 0 6px;line-height:1.2}
+  h2 .num{color:var(--coral);font-family:var(--mono);font-size:15px;font-weight:600;vertical-align:middle;margin-right:10px}
+  p{margin:14px 0;max-width:68ch}
+
+  /* tappable terms */
+  .term{background:linear-gradient(transparent 70%, var(--teal-soft) 70%);border:none;border-bottom:1.5px dashed var(--teal);
+        padding:0 1px;font:inherit;color:inherit;cursor:pointer;text-align:left}
+  .term:focus-visible{outline:2.5px solid var(--coral);outline-offset:2px}
+  /* citation chips */
+  .cite{font-family:var(--mono);font-size:12px;font-weight:600;color:var(--violet);background:var(--violet-soft);
+        border:1px solid var(--violet);border-radius:10px;padding:1px 8px;cursor:pointer;vertical-align:2px}
+  .cite:focus-visible{outline:2.5px solid var(--coral);outline-offset:2px}
+  /* the expansion card both produce */
+  .popcard{display:block;background:var(--card);border:1px solid var(--line);border-left:4px solid var(--teal);
+           padding:12px 14px;margin:10px 0;font-size:15px;color:var(--ink2);max-width:68ch;animation:open .18s ease-out}
+  .popcard.citecard{border-left-color:var(--violet)}
+  .popcard b{color:var(--ink)}
+  .popcard .src{font-family:var(--mono);font-size:11.5px;color:var(--ink2);display:block;margin-top:6px}
+  @keyframes open{from{opacity:0;transform:translateY(-3px)}to{opacity:1;transform:none}}
+  @media (prefers-reduced-motion:reduce){.popcard{animation:none}}
+
+  /* go-deeper layers */
+  details.deeper{background:var(--card);border:1px solid var(--line);margin:16px 0}
+  details.deeper summary{cursor:pointer;padding:12px 15px;font-family:var(--mono);font-size:13px;font-weight:600;color:var(--violet);list-style:none}
+  details.deeper summary::-webkit-details-marker{display:none}
+  details.deeper summary::before{content:'▸ ';color:var(--violet)}
+  details.deeper[open] summary::before{content:'▾ '}
+  details.deeper .body{padding:0 15px 14px;font-size:15px;color:var(--ink2)}
+  details.deeper .eq{font-family:var(--mono);font-size:14px;background:var(--paper);padding:10px 12px;margin:8px 0;overflow-x:auto}
+
+  .openclaim{background:#fdf6e9;border:1px solid var(--open);border-left:5px solid var(--open);padding:14px 16px;margin:18px 0;font-size:15.5px}
+  .openclaim .tag{font-family:var(--mono);font-size:11px;color:var(--open);border:1px solid var(--open);padding:2px 7px;margin-right:8px}
+  .punch{font-family:var(--serif);font-style:italic;font-size:20px;border-left:4px solid var(--coral);padding:6px 0 6px 16px;margin:26px 0;max-width:60ch}
+  footer{margin-top:56px;padding:22px 0 60px;border-top:3px solid var(--ink);font-size:14px;color:var(--ink2)}
+  .mono{font-family:var(--mono)}
+  .btnrow{display:flex;gap:10px;flex-wrap:wrap;margin:20px 0}
+  .btn{font-family:var(--mono);font-size:13.5px;font-weight:600;text-decoration:none;padding:11px 16px;border:1.5px solid var(--ink);color:var(--ink);background:var(--card)}
+  .btn.primary{background:var(--teal);border-color:var(--teal);color:#fff}
+  .cta{display:flex;gap:10px;flex-wrap:wrap;margin:22px 0 4px}
+  .btn:focus-visible{outline:3px solid var(--coral);outline-offset:2px}
+.provenance{display:flex;flex-wrap:wrap;gap:0;margin:18px 0 4px;border:1.5px solid var(--ink);background:var(--card);font-family:var(--mono);font-size:12px;overflow:hidden}
+.provenance .pv-item{display:flex;flex-direction:column;gap:2px;padding:9px 14px;border-right:1px solid var(--line);text-decoration:none;color:var(--ink);min-width:0}
+.provenance .pv-item:last-child{border-right:none}
+.provenance a.pv-item:hover{background:var(--teal-soft,#e3f0f0)}
+.provenance .pv-k{font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink2)}
+.provenance .pv-v{font-size:12.5px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.provenance a.pv-item .pv-v{color:var(--teal)}
+#pv-state{color:var(--open,#b07d1f)}
+@media(max-width:560px){.provenance .pv-item{flex:1 1 45%;border-bottom:1px solid var(--line)}}
+.publish-cta{margin:46px 0 8px;padding:22px 24px;border:1.5px solid var(--teal);background:var(--teal-soft,#e3f0f0);
+  display:flex;flex-wrap:wrap;align-items:center;gap:14px 20px;justify-content:space-between}
+.publish-cta .pc-text{flex:1 1 320px;min-width:0}
+.publish-cta .pc-h{font-family:var(--serif);font-weight:700;font-size:20px;color:var(--ink);margin:0 0 3px}
+.publish-cta .pc-sub{font-size:14px;color:var(--ink2);margin:0}
+.publish-cta a.pc-btn{flex:0 0 auto;font-family:var(--mono);font-size:14px;font-weight:600;text-decoration:none;
+  background:var(--teal);color:#fff;padding:12px 20px;white-space:nowrap}
+.publish-cta a.pc-btn:hover{background:#0a615f}
+
+  h3{font-family:var(--serif);font-weight:600;font-size:20px;margin:30px 0 4px;line-height:1.25;color:var(--ink)}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="eyebrow">An Open Dossier · <b>NNN</b> · prior-art reconnaissance · Phase 0</div>
+  <h1>Prior-Art Reconnaissance — The Quantum Computing Landscape</h1>
+  <div class="byline">Irfan Ali-Khan — Independent Researcher · Phase 0 working map (pre-release draft)</div>
+  <div class="provenance" role="contentinfo" aria-label="Provenance and verification">
+    <span class="pv-item"><span class="pv-k">Reading</span><span class="pv-v" id="pv-state">live tip</span></span>
+    <a class="pv-item" id="pv-doi" href="#" target="_blank" rel="noopener"><span class="pv-k">Archived DOI</span><span class="pv-v" id="pv-doi-v">loading… ↗</span></a>
+    <a class="pv-item" href="verify.html" target="_blank" rel="noopener"><span class="pv-k">Bitcoin timestamp</span><span class="pv-v">verify proof ↗</span></a>
+    <a class="pv-item" href="https://github.com/m4gr4th34/dossier-quantum-computing-general-overview" target="_blank" rel="noopener"><span class="pv-k">Source</span><span class="pv-v">full history ↗</span></a>
+  </div>
+  <div class="cta">
+    <a class="btn" href="index.html">Explore the result</a>
+    <a class="btn" href="paper.html">Self-explaining edition</a>
+    <a class="btn" href="dossier.html">Audit trail</a>
+    <a class="btn primary" href="docs/prior-art-recon.pdf">Download as PDF</a>
+    <a class="btn" href="https://github.com/m4gr4th34/dossier-quantum-computing-general-overview">Source &amp; issues</a>
+  </div>
+</header>
+
+<div class="openclaim"><span class="tag">PHASE 0</span><strong>STATUS: Phase 0 prior-art reconnaissance — a working map, not laddered claims.</strong> Nothing here is asserted as a verified result of this dossier. Every entry is tagged by evidence tier (ESTABLISHED / ADJACENT / OPEN). Demonstrated, peer-reviewed results are stated plainly with sources; vendor roadmaps, announcements, and contested claims are flagged as such; comparative and predictive judgements are held in the OPEN bucket as forecasts. These rows still need a per-claim human reality-check before any of them enters the formal claim ledger, <code>verify_numbers.py</code>, or the manuscript. <em>The one rule: every label is true.</em></div>
+<h2><span class="num">01</span>How to read this map</h2>
+<p>One distinction governs everything below, because it is the single most common way this topic gets misreported:</p>
+<ul><li><strong>Physical vs logical qubits.</strong> A raw qubit count is not an error-corrected (logical) qubit count. We state which is which everywhere.</li><li><strong>Demonstrated vs roadmap.</strong> A measured, published result is a different kind of object from a company&#x27;s projection of where it will be in 2029. Both appear here; only the first is ESTABLISHED.</li><li><strong>Peer-reviewed vs interested-party.</strong> A Nature paper and a press release are not the same evidence tier. Vendor and aggregator claims are flagged.</li></ul>
+<p>Evidence tiers used here:</p>
+<ul><li><strong>ESTABLISHED</strong> — demonstrated on hardware, with a peer-reviewed or otherwise primary source. Asserted plainly.</li><li><strong>ADJACENT</strong> — announced, roadmapped, or contested; an interested party&#x27;s claim not yet independently reproduced, or a result the community disputes.</li><li><strong>OPEN</strong> — a comparative or predictive judgement (probability of success, &quot;who wins,&quot; timelines). Held as a forecast with a falsifiable signpost; never asserted as settled.</li></ul>
+<h2><span class="num">02</span>The landscape, avenue by avenue</h2>
+<h3>Superconducting (Google, IBM, Rigetti, IQM)</h3>
+<ul><li><strong>Best demonstrated:</strong> Google&#x27;s Willow processor (105 physical qubits) showed <em>below-threshold</em> error correction — the logical error rate falls as the code distance grows (d=3 to d=5 to d=7), reaching roughly 0.14% logical error per cycle at d=7 with real-time decoding (peer-reviewed, late 2024). IBM&#x27;s Condor reached 1,121 physical qubits in 2023 before IBM pivoted to smaller, higher-quality, modular chips (Heron, Nighthawk).</li><li><strong>Strength:</strong> most mature at scale; fast gates; the clearest public access ladder and roadmap (IBM).</li><li><strong>Weakness:</strong> surface-code overhead (hundreds-to-thousands of physical qubits per logical qubit); cryogenic; chip-to-chip interconnect is the scaling frontier.</li><li><strong>Maturity:</strong> highest. The reference platform the others are measured against.</li></ul>
+<h3>Trapped ion (Quantinuum, IonQ — IonQ now includes Oxford Ionics)</h3>
+<ul><li><strong>Best demonstrated:</strong> Quantinuum&#x27;s Helios — 98 physical barium ions at ~99.92% two-qubit fidelity across all pairs, yielding 48 error-corrected logical qubits at roughly a 2:1 physical-to-logical ratio (Nov 2025). Oxford Ionics / IonQ have reported the highest gate fidelities of any platform (two-qubit ~99.99%, single-qubit error around the 10^-7 level).</li><li><strong>Strength:</strong> highest fidelities and longest coherence of any modality; the best (lowest) encoding ratio on the logical-qubit leaderboard.</li><li><strong>Weakness:</strong> slower gate speeds; laser/optics complexity has been the historic scaling bottleneck (the problem the microwave-gate and ions-on-chip approaches are trying to solve).</li><li><strong>Maturity:</strong> high on quality; scaling to large qubit numbers is the open question.</li></ul>
+<h3>Neutral atom (QuEra, Pasqal, Atom Computing)</h3>
+<ul><li><strong>Best demonstrated:</strong> QuEra reported 96 logical qubits from 448 physical atoms with below-threshold error suppression (peer-reviewed, Jan 2026) — the current logical-qubit count leader. Atom Computing crossed 1,000 physical atoms in 2023; Pasqal has operated ~1,000-atom systems.</li><li><strong>Strength:</strong> traps are cheap; atoms are identical by physics (no device-to-device variability); connectivity is reconfigurable in software rather than fixed by lithography.</li><li><strong>Weakness:</strong> a younger control/gate stack; gate speed and fidelity still maturing relative to ions.</li><li><strong>Maturity:</strong> rising fast; strongest recent logical-qubit results.</li></ul>
+<h3>Silicon spin (Intel, Diraq, Silicon Quantum Computing, Quantum Motion, Equal1)</h3>
+<ul><li><strong>Best demonstrated:</strong> Diraq + imec showed &gt;99% two-qubit fidelity for silicon spin qubits built on a standard 300mm CMOS foundry line — and, notably, across multiple randomly selected dies, not one hero device (peer-reviewed, Sept 2025). Silicon Quantum Computing reported ~99.99% two-qubit fidelity (peer-reviewed, Dec 2025).</li><li><strong>Strength:</strong> smallest physical footprint; rides the existing semiconductor manufacturing base, giving (in principle) the cheapest path to millions of qubits.</li><li><strong>Weakness:</strong> lowest qubit counts today; no logical-qubit demonstration yet on this modality.</li><li><strong>Maturity:</strong> earliest on integration, but the manufacturing-scale argument is the strongest of any avenue if the counts come.</li></ul>
+<h3>Photonic (PsiQuantum, Xanadu, Quandela)</h3>
+<ul><li><strong>Best demonstrated:</strong> Xanadu&#x27;s Aurora — a 12-qubit modular, networked, room-temperature photonic machine built from 35 chips and ~13 km of fiber (peer-reviewed, Jan 2025) — plus on-chip generation of error-resistant GKP states (peer-reviewed, June 2025).</li><li><strong>Strength:</strong> room-temperature operation; networking and modularity are native; rides silicon-photonics fabrication.</li><li><strong>Weakness:</strong> <strong>optical loss</strong> is the make-or-break bottleneck; many gates are inherently probabilistic, demanding heavy redundancy.</li><li><strong>Maturity:</strong> key building blocks shown; the loss problem stands between the blocks and a useful machine.</li></ul>
+<h3>Topological (Microsoft) — CONTESTED</h3>
+<ul><li><strong>Claim:</strong> Majorana 1 (Feb 2025), presented as 8 topological qubits and a hardware path toward a million-qubit chip.</li><li><strong>Status — ADJACENT / contested:</strong> the accompanying Nature paper&#x27;s reviewers explicitly noted the results do not constitute evidence for Majorana zero modes, and independent physicists at the 2025 APS meeting were largely unconvinced the device demonstrates a topological qubit. A follow-up (Majorana 2) reports longer lifetimes but leaves the central physics question open.</li><li><strong>If real:</strong> intrinsic, hardware-level error protection — a potentially decisive scaling advantage. That payoff is exactly why it is worth pursuing, and exactly why the bar for &quot;demonstrated&quot; must stay high.</li><li><strong>Maturity:</strong> a genuine materials-science bet whose foundational claim is not yet accepted.</li></ul>
+<h3>Annealing (D-Wave) — a distinct, non-gate avenue</h3>
+<ul><li><strong>Status:</strong> D-Wave&#x27;s Advantage2 annealers are in commercial optimization use today; annealing is not universal/gate-based computing. D-Wave has now announced a separate gate-model roadmap (initial small system in 2026; a target of 100 logical qubits by 2032) — that gate-model line is early and roadmap-stage.</li><li><strong>Note:</strong> keep annealing clearly separated from the gate-based fault-tolerance race; it answers a different question.</li></ul>
+<h3>Sub-threads worth a flag (not top-level rows here)</h3>
+<ul><li><strong>Cat / bosonic qubits (Alice &amp; Bob):</strong> hardware-level bit-flip protection, with reported bit-flip lifetimes exceeding one hour — a distinct error-correction strategy that can sit under superconducting hardware.</li><li><strong>NV-center / diamond, and Rydberg-specific variants:</strong> real but treated as sub-threads pending your call on whether any deserves its own row.</li></ul>
+<h2><span class="num">03</span>The three buckets (summary)</h2>
+<h3>ESTABLISHED (demonstrated; mostly peer-reviewed)</h3>
+<ol><li>Below-threshold error correction now exists on real hardware in at least three modalities — superconducting (Google Willow), neutral-atom (QuEra), and trapped-ion (Quantinuum Helios). It is no longer only theory.</li><li>Trapped ions hold the fidelity lead; silicon spin has now matched ~99.99% two-qubit fidelity <em>and</em> shown it on an industrial foundry line across non-cherry-picked dies.</li><li>High-rate codes (color codes, qLDPC) have driven the physical-to-logical ratio down to ~2:1 on ion and atom hardware, versus hundreds-to-one for the surface code — a demonstrated overhead reduction.</li><li>Neutral-atom and superconducting platforms operate at 1,000+ physical qubits in real systems; photonics has shown a room-temperature modular networked prototype.</li></ol>
+<h3>ADJACENT (announced / roadmap / contested — interested-party until reproduced)</h3>
+<ol><li>Every &quot;fault tolerance by year X&quot; roadmap: IBM (large-scale FT ~2029), IonQ (an accelerated roadmap citing thousands of logical qubits by the late 2020s), Pasqal / QuEra / Atom logical-qubit ladders, D-Wave&#x27;s gate-model 100-logical-by-2032. All are vendor projections.</li><li>Microsoft&#x27;s topological qubit (Majorana 1 / 2): a real materials bet whose foundational claim the community disputes.</li><li>Single-vendor &quot;quantum advantage&quot; / utility benchmarks not yet independently reproduced.</li></ol>
+<h3>OPEN (the dossier&#x27;s core forecasts — to be posted as challenges)</h3>
+<ol><li>Which modality reaches fault-tolerant, useful-scale QC first.</li><li>The probability of success per avenue/material.</li><li>The &quot;most promising candidate&quot; call.</li><li>The timeline to a cryptographically-relevant or industrially-useful machine.</li></ol>
+<p>Each OPEN item, when entered in the ledger, carries a forecast label, the explicit reasoning and a base rate or comparable where possible, and a falsifiable signpost — for example: a logical qubit sustained below a stated error rate over a stated number of cycles; a below-threshold surface-code patch at a stated scale; or a photonic system demonstrating loss below the fault-tolerance threshold.</p>
+<h2><span class="num">04</span>Candidate OPEN forecasts to seed the ledger (draft — needs sign-off)</h2>
+<p>These are <em>not yet</em> ledger rows. They are the predictive claims this dossier will make, each to be labeled OPEN-UNVERIFIED with a signpost:</p>
+<ul><li><strong>QC-F1</strong> — &quot;No single modality has yet secured the path to fault-tolerant, useful-scale QC; the leaders by distinct metric are trapped-ion (fidelity, encoding ratio), neutral-atom (logical-qubit count), and superconducting (scale, maturity).&quot; (Forecast; signpost: first sustained, reproduced logical-qubit advantage on a useful problem.)</li><li><strong>QC-F2</strong> — Per-avenue probability-of-success estimates (to be built with stated assumptions). (Forecast; signposts per avenue.)</li><li><strong>QC-F3</strong> — &quot;Silicon spin has the strongest manufacturing-scale argument but the furthest to go on logical qubits.&quot; (Forecast; signpost: first logical-qubit demonstration on silicon spin at a stated fidelity.)</li><li><strong>QC-F4</strong> — &quot;Microsoft&#x27;s topological route remains unproven at the level of the qubit itself.&quot; (Currently ADJACENT/contested; signpost: independent reproduction of a topological qubit with accepted Majorana evidence.)</li></ul>
+<h2><span class="num">05</span>Reality-check questions for the author</h2>
+<ol><li><strong>Aggregator-sourced numbers.</strong> Several figures (some fidelity records, logical-qubit counts, roadmap dates) trace to industry-news aggregators that often restate vendor PR. The Nature-anchored ones (Willow, QuEra 96, Diraq/imec, Xanadu, SQC) are firmer. Any you know to be misreported?</li><li><strong>The probability call.</strong> The safe framing is &quot;no clear winner yet,&quot; but this dossier deliberately wants a probability-of-success call per avenue. Do you have a prior on which avenue you lean toward, so the strongest forecast is built there?</li><li><strong>Missing avenues.</strong> Should cat/bosonic, NV-center/diamond, or any Rydberg variant be promoted to a top-level row?</li><li><strong>Materials axis.</strong> You flagged materials specifically (silicon-28 enrichment; barium vs ytterbium ions; InAs/Al for topological; lithium-niobate vs silicon-nitride photonics). Develop &quot;materials&quot; as its own axis, or fold it into each modality?</li></ol>
+<h2><span class="num">06</span>Sources consulted (Phase 0; to be re-verified at citation-audit stage)</h2>
+<p>Peer-reviewed / primary:</p>
+<ul><li>Silicon spin, 300mm foundry, &gt;99% fidelity — <em>Nature</em> (2025): <a href="https://www.nature.com/articles/s41586-025-09531-9">https://www.nature.com/articles/s41586-025-09531-9</a></li><li>Diraq/imec milestone announcement — Diraq newsroom (Sept 2025): <a href="https://diraq.com/newsdesk/imec-technology-lights-the-path-to-utility-scale-for-diraq-s-quantum-chips">https://diraq.com/newsdesk/imec-technology-lights-the-path-to-utility-scale-for-diraq-s-quantum-chips</a></li><li>Xanadu Aurora (modular networked photonic) — Xanadu / <em>Nature</em> (Jan 2025): <a href="https://www.xanadu.ai/press/xanadu-introduces-aurora-worlds-first-scalable-networked-and-modular-quantum-computer">https://www.xanadu.ai/press/xanadu-introduces-aurora-worlds-first-scalable-networked-and-modular-quantum-computer</a></li><li>Xanadu on-chip GKP states — The Quantum Insider (June 2025): <a href="https://thequantuminsider.com/2025/06/05/xanadu-demonstrates-scalable-building-block-for-photonic-quantum-computers/">https://thequantuminsider.com/2025/06/05/xanadu-demonstrates-scalable-building-block-for-photonic-quantum-computers/</a></li><li>Microsoft topological-qubit skepticism — APS <em>Physics</em> (2025): <a href="https://link.aps.org/doi/10.1103/Physics.18.68">https://link.aps.org/doi/10.1103/Physics.18.68</a> ; <em>Science</em> (2025): <a href="https://www.science.org/content/article/debate-erupts-around-microsoft-s-blockbuster-quantum-computing-claims">https://www.science.org/content/article/debate-erupts-around-microsoft-s-blockbuster-quantum-computing-claims</a></li></ul>
+<p>Industry news / vendor (flagged — restate vendor or aggregator claims):</p>
+<ul><li>Superconducting / Willow below-threshold, roadmaps — Network World (2025): <a href="https://www.networkworld.com/article/4088709/top-quantum-breakthroughs-of-2025.html">https://www.networkworld.com/article/4088709/top-quantum-breakthroughs-of-2025.html</a></li><li>Trapped-ion state of play (2026) — The Quantum Insider: <a href="https://thequantuminsider.com/2026/06/12/trapped-ion-quantum-computing-companies-technology-and-where-it-stands-in-2026/">https://thequantuminsider.com/2026/06/12/trapped-ion-quantum-computing-companies-technology-and-where-it-stands-in-2026/</a></li><li>Trapped-ion fidelity / Helios detail — PostQuantum: <a href="https://postquantum.com/quantum-modalities/trapped-ion-qubits/">https://postquantum.com/quantum-modalities/trapped-ion-qubits/</a></li><li>Neutral-atom companies / QuEra 96 logical — Quantum Zeitgeist: <a href="https://quantumzeitgeist.com/top-neutral-atom-quantum-computing-companies/">https://quantumzeitgeist.com/top-neutral-atom-quantum-computing-companies/</a></li><li>Pasqal roadmap — Pasqal newsroom (2026): <a href="https://www.pasqal.com/newsroom/pasqal-releases-2025-roadmap/">https://www.pasqal.com/newsroom/pasqal-releases-2025-roadmap/</a></li><li>IBM roadmap detail — PostQuantum: <a href="https://postquantum.com/quantum-computing-companies/ibm/">https://postquantum.com/quantum-computing-companies/ibm/</a></li><li>Silicon-spin companies (2026) — Quantum Zeitgeist: <a href="https://quantumzeitgeist.com/top-silicon-spin-quantum-computing-companies/">https://quantumzeitgeist.com/top-silicon-spin-quantum-computing-companies/</a></li><li>D-Wave gate-model roadmap (June 2026) — Business Wire: <a href="https://www.businesswire.com/news/home/20260601444734/en/">https://www.businesswire.com/news/home/20260601444734/en/</a></li><li>Quantum error correction / logical-qubit leaderboard overview — Quantum Zeitgeist: <a href="https://quantumzeitgeist.com/what-is-quantum-error-correction/">https://quantumzeitgeist.com/what-is-quantum-error-correction/</a></li><li>&quot;What quantum computer to buy?&quot; buyer-guide preprint (roadmap synthesis): <a href="https://arxiv.org/pdf/2604.04761">https://arxiv.org/pdf/2604.04761</a></li></ul>
+
+<div class="publish-cta">
+  <div class="pc-text">
+    <p class="pc-h">Want to publish like this?</p>
+    <p class="pc-sub">You just read a pre-ladder working map that labels every entry by evidence tier. You can publish research like this too — Open Dossier is a free template, and an AI agent does the drafting, typesetting, citations, and verification. Idea to live publication in an afternoon.</p>
+  </div>
+  <a class="pc-btn" href="https://github.com/m4gr4th34/open-dossier-template/blob/main/GETTING-STARTED.md">Publish your own →</a>
+</div>
+
+<footer>
+  <b>About this page:</b> this is Phase 0 working material — a prior-art reconnaissance map, not a laddered claim set. The finished editions are the <a href="paper.html">self-explaining edition</a>, the <a href="index.html">interactive edition</a> with its verification console, and the <a href="dossier.html">audit trail</a>. The Markdown source and a downloadable <a href="docs/prior-art-recon.pdf">PDF</a> live in <span class="mono">docs/</span>.
+  <br><br><span class="mono">Open Dossier format · Phase 0 working draft · committed as a plain commit (no
+release, no DOI, no timestamp) · CC BY 4.0 (prose). This document supersedes
+nothing and asserts nothing as verified; it is the input to the claim ledger.</span>
+</footer>
+
+</div>
+
+<script>
+fetch('provenance.json').then(r=>r.json()).then(p=>{
+  const d=document.getElementById('pv-doi'), v=document.getElementById('pv-doi-v');
+  if(!p.version_doi || p.version_doi.indexOf('TODO')===0){
+    v.textContent='DOI after first release';
+    d.href='https://github.com/m4gr4th34/dossier-quantum-computing-general-overview';
+  } else {
+    d.href='https://doi.org/'+p.version_doi; v.textContent=p.version_doi+' ↗';
+  }
+  document.getElementById('pv-state').textContent='Phase 0 · pre-release';
+}).catch(()=>{document.getElementById('pv-doi-v').textContent='see repository ↗';
+  document.getElementById('pv-doi').href='https://github.com/m4gr4th34/dossier-quantum-computing-general-overview';});
+</script>
+</body>
+</html>
