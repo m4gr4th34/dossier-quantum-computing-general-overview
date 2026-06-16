@@ -135,7 +135,7 @@ quantum computing on a roughly <b>10–15 year horizon</b>. An avenue that produ
 
 <h2><span class="num">02</span>The avenues</h2>
 
-<p>Six gate-model avenues, plus an annealing aside that answers a different question. For each: the demonstrated basis, the case for and against, then the forecast box. Where a date or milestone comes from a company's own roadmap rather than an independent result, it is attributed to the vendor and labeled as a projection.</p>
+<p>Seven gate-model avenues, plus an annealing aside that answers a different question. For each: the demonstrated basis, the case for and against, then the forecast box. Where a date or milestone comes from a company's own roadmap rather than an independent result, it is attributed to the vendor and labeled as a projection.</p>
 
 <h3>Superconducting (Google, IBM, Rigetti, IQM)</h3>
 <p><b>Basis.</b> Google's Willow processor (105 physical qubits) demonstrated
@@ -187,12 +187,19 @@ is the make-or-break bottleneck and is not yet solved, and many gates are inhere
 <span class="tag">OPEN-UNVERIFIED</span><b>Forecast — Topological: ~15%.</b> A bet on an unproven physics claim; low expected value precisely because the existence question is still open. <b>Signpost:</b> independent reproduction of an accepted topological qubit — which could collapse this toward 0 or jump it materially. Loose, independent odds (±~15 pts, mid-2026); ledger id <span class="mono">QCF6</span>.
 </div>
 
+<h3>NV centers (nitrogen-vacancy in diamond)</h3>
+<p><b>Basis.</b> The qubit is a defect in a diamond crystal — a nitrogen atom sitting beside a missing carbon atom — and the computation uses the spin of an electron trapped at that site.</p>
+<p><b>Pros.</b> Operates at <b>room temperature</b>, with no dilution refrigerator; long spin coherence; and a natural optical interface (the spin can be read out and controlled with light), which makes NV centres outstanding for quantum networking, sensing, and communication. <b>Cons.</b> It has proven very hard to scale into large, connected processors: accurately placing and wiring many NV qubits in diamond is the unsolved bottleneck, and the field has largely converged on NV being superb for sensors and network nodes rather than a route to a general fault-tolerant computer.</p>
+<div class="openclaim">
+<span class="tag">OPEN-UNVERIFIED</span><b>Forecast — NV centers: ~12%.</b> The physics is strong, but the case for <i>scalable, general-purpose</i> computing is weak — qubit placement and wiring in diamond is the unsolved problem. This ~12% measures the fault-tolerant, useful-scale <b>computing</b> question specifically; it is <i>not</i> a judgement that NV is weak — its real strength points at sensing and networking, a different lane this number does not measure. <b>Signpost:</b> revises <i>up</i> with a credible multi-qubit error-corrected NV processor architecture that has a real scaling path — not another sensing or networking milestone. Loose, independent odds (±~15 pts, mid-2026); ledger id <span class="mono">QCF9</span>.
+</div>
+
 <h3>Annealing / D-Wave — an aside, not ranked head-to-head</h3>
 <p>D-Wave's annealers are in commercial optimization use today — a real, already-banked win — but
 <button class="term" data-d="Quantum annealing is a special-purpose technique for optimization problems: it relaxes a system toward a low-energy answer. It is not universal, gate-based quantum computing, so it cannot run the general algorithms (like Shor's) that the rest of this dossier is about. It answers a different question.">annealing</button>
 is not universal gate-based computing, so it sits outside the fault-tolerance race this dossier scores. D-Wave has separately announced a gate-model roadmap (a small initial system, targeting 100 logical qubits by 2032 — the company's projection) <button class="cite" data-c="dwave">D-Wave '26</button>.</p>
 <div class="openclaim">
-<span class="tag">OPEN-UNVERIFIED</span><b>Forecast — D-Wave gate-model pivot: ~30%</b> (aside, not ranked against the six above). The present-day annealing business is a separate, already-banked success answering a different question. <b>Signpost:</b> revises <i>up</i> if the gate-model line delivers logical qubits on its roadmap. Loose (mid-2026); ledger id <span class="mono">QCF7</span>.
+<span class="tag">OPEN-UNVERIFIED</span><b>Forecast — D-Wave gate-model pivot: ~30%</b> (aside, not ranked against the seven above). The present-day annealing business is a separate, already-banked success answering a different question. <b>Signpost:</b> revises <i>up</i> if the gate-model line delivers logical qubits on its roadmap. Loose (mid-2026); ledger id <span class="mono">QCF7</span>.
 </div>
 
 <h2><span class="num">03</span>The optical-versus-electronic question</h2>
