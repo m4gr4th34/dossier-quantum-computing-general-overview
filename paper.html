@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Self-Explaining Edition — Quantum Computing: A General Overview (Open Dossier)</title>
-<meta name="description" content="YOUR ONE-LINE DESCRIPTION. The full paper, written to explain itself.">
+<meta name="description" content="An equal-weight overview of the quantum-computing avenues with loose, OPEN-UNVERIFIED per-path success-probability forecasts (mid-2026 snapshot). Written to explain itself.">
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,600;0,800;1,400;1,600&family=IBM+Plex+Mono:wght@400;600&display=swap');
   :root{
@@ -28,6 +28,7 @@
   .howto .mono{font-family:var(--mono);font-size:13px}
   h2{font-family:var(--serif);font-weight:600;font-size:27px;margin:48px 0 6px;line-height:1.2}
   h2 .num{color:var(--coral);font-family:var(--mono);font-size:15px;font-weight:600;vertical-align:middle;margin-right:10px}
+  h3{font-family:var(--serif);font-weight:600;font-size:20px;margin:30px 0 4px;line-height:1.25;color:var(--ink)}
   p{margin:14px 0;max-width:68ch}
 
   /* tappable terms */
@@ -112,43 +113,99 @@
   </div>
 </header>
 
-<!-- ============================================================
-     AUTHOR INSTRUCTIONS (delete this comment when done):
-     1. Write your paper as numbered narrative sections below.
-        Plain language first; math goes in details.deeper blocks.
-     2. Wrap technical terms in:
-        <button class="term" data-d="3-5 sentence plain explanation">term</button>
-     3. Cite with chips:
-        <button class="cite" data-c="KEY">Venue 'YY</button>
-        ...and add KEY to the CITES database in the script below,
-        with who/what/src — what the source showed, in 2 sentences.
-     4. Any OPEN-UNVERIFIED claim gets an .openclaim box, in the text,
-        where the claim is made. Honest labels, always.
-     ============================================================ -->
+<h2><span class="num">01</span>What this dossier is, and how to read it</h2>
 
-<h2><span class="num">01</span>YOUR FIRST SECTION TITLE</h2>
+<p>This is an <b>equal-weight overview</b> of the main avenues to quantum computing, as they stand in mid-2026. It is not advocacy for one platform. It is a map of where each approach actually is, what it has demonstrated, and an honest — deliberately loose — estimate of each one's odds of going all the way. The weighting across avenues is equal for now; that will change as the research lands.</p>
 
-<p>Your opening narrative. Here is a
-<button class="term" data-d="Replace this with a 3-5 sentence plain-language explanation of the term, written for a smart non-specialist. What is it, why does it matter here, what is the one surprising thing about it?">tappable term</button>
-and here is a claim with a source
-<button class="cite" data-c="ref1">Journal 'YY</button>.
-Write the whole argument this way — every concept explained where it first appears.</p>
+<p>One distinction governs everything below, because it is the single most common way this topic gets misreported: the difference between a
+<button class="term" data-d="A physical qubit is one real piece of quantum hardware — a single superconducting circuit, trapped ion, or atom. It is fragile: noise corrupts it in microseconds to milliseconds. Raw 'qubit count' numbers from press releases almost always mean physical qubits.">physical qubit</button>
+and a
+<button class="term" data-d="A logical qubit is a single robust qubit built out of many physical qubits stitched together by error correction, so the encoded information survives far longer than any one physical qubit. This is the unit that actually matters for useful computation. A machine with 1,000 physical qubits may have only a handful of logical qubits — or none.">logical qubit</button>.
+A raw qubit count is not an error-corrected qubit count, and the two can differ by hundreds to one. We state which is which everywhere.</p>
 
-<details class="deeper"><summary>Go deeper: NAME THE TECHNICAL LAYER</summary>
-<div class="body">Equations and formal detail live here, collapsed by default.
-<div class="eq">your_equation = goes / here</div>
-Cite within deeper blocks the same way <button class="cite" data-c="ref2">Journal 'YY</button>.</div>
-</details>
+<p>By <b>success</b> we mean one specific thing: an avenue reaching
+<button class="term" data-d="Fault tolerance means the machine can run arbitrarily long computations because errors are detected and corrected faster than they accumulate. 'Useful-scale' adds that it can do this on problems real users care about — chemistry, materials, cryptography — not just demonstrations. This is the finish line the whole field is aiming at.">fault-tolerant, useful-scale</button>
+quantum computing on a roughly <b>10–15 year horizon</b>. An avenue that produces a striking demo but never reaches that finish line does not count as success under this definition.</p>
 
-<h2><span class="num">02</span>YOUR SECOND SECTION TITLE</h2>
+<p><b>How to read the probabilities.</b> Each avenue below carries a percentage. These are <b>independent, loose per-path odds</b> — each answers "will <i>this</i> path reach the finish line?" on its own. They are <b>not a pie</b>: they do not, and should not, sum to 100, because more than one avenue can succeed (or all can fail). Each figure is soft (±~15 points), a mid-2026 snapshot, and an <b>OPEN-UNVERIFIED author forecast</b> this dossier fully expects to revise as evidence accumulates. Every one is posted as an open challenge in the <a href="https://github.com/m4gr4th34/dossier-quantum-computing-general-overview/blob/main/claim_ledger.csv">claim ledger</a> (ids <span class="mono">QCF1–QCF8</span>).</p>
 
-<p>Continue the narrative. If a claim is published unverified by design, label it honestly where it appears:</p>
-
-<div class="openclaim">
-<span class="tag">OPEN-UNVERIFIED</span><b>Honest label:</b> DESCRIBE THE UNVERIFIED CLAIM. State that it is claim <span class="mono">CNN</span> in the public ledger and an open challenge: <b>the first person to confirm or refute it gets named credit in the next version.</b>
+<div class="howto">
+<b>Citation audit pending.</b> The sources cited below are shown <i>as reported by the cited work</i>. The Phase-4 citation audit — re-fetching and checking each one against primary sources — has <b>not yet been done</b>; it will appear in the <a href="dossier.html">audit trail</a>. Until then, treat every <span class="mono">source chip</span> as "reported, not yet independently verified." <span class="mono">No source here is marked verified.</span>
 </div>
 
-<p class="punch">End with the line your readers should carry away.</p>
+<h2><span class="num">02</span>The avenues</h2>
+
+<p>Six gate-model avenues, plus an annealing aside that answers a different question. For each: the demonstrated basis, the case for and against, then the forecast box. Where a date or milestone comes from a company's own roadmap rather than an independent result, it is attributed to the vendor and labeled as a projection.</p>
+
+<h3>Superconducting (Google, IBM, Rigetti, IQM)</h3>
+<p><b>Basis.</b> Google's Willow processor (105 physical qubits) demonstrated
+<button class="term" data-d="Below-threshold means that as you make the error-correcting code bigger, the logical error rate goes DOWN rather than up. It is the signal that error correction is actually working — that scaling helps instead of hurts. Crossing below threshold was a long-sought milestone, shown convincingly in 2024.">below-threshold error correction</button>
+— the logical error rate fell as the code grew (distance 3→5→7), reaching about 0.14% logical error per cycle with real-time decoding <button class="cite" data-c="willow">Willow '24</button>. IBM's Condor reached 1,121 physical qubits before IBM pivoted to smaller, higher-quality modular chips <button class="cite" data-c="condor">Condor '23</button>.</p>
+<p><b>Pros.</b> Most mature at scale; fast gates; the most capital and the deepest bench of serious players, which de-risks the path. <b>Cons.</b> The
+<button class="term" data-d="The surface code is the leading error-correction scheme for superconducting qubits. It is forgiving of hardware noise but expensive: it can take hundreds to thousands of physical qubits to build one good logical qubit. That overhead is the central scaling worry for this avenue.">surface code</button>
+overhead is heavy (hundreds-to-thousands of physical qubits per logical qubit), everything runs cryogenic, and chip-to-chip interconnect is the open scaling frontier. IBM's published roadmap targets large-scale fault tolerance around 2029 — the company's own projection, not an independent result.</p>
+<div class="openclaim">
+<span class="tag">OPEN-UNVERIFIED</span><b>Forecast — Superconducting: ~70%.</b> Most mature, most capital, fastest gates, and error correction already improving with scale; multiple serious players de-risk it. <b>Signpost:</b> revises <i>up</i> if modular interconnect and logical scaling keep working; <i>down</i> if the overhead proves intractable. Loose, independent per-path odds (±~15 pts, mid-2026); ledger id <span class="mono">QCF1</span> — open challenge, named credit to whoever sharpens it.
+</div>
+
+<h3>Trapped ion (Quantinuum, IonQ incl. Oxford Ionics)</h3>
+<p><b>Basis.</b> Quantinuum's Helios ran 98 physical barium ions at ~99.92% two-qubit fidelity across all pairs, yielding 48 error-corrected logical qubits at roughly a 2:1
+<button class="term" data-d="The encoding ratio is how many physical qubits it takes to make one logical qubit. Lower is better. Trapped-ion and neutral-atom systems using high-rate codes have pushed this near 2:1, versus hundreds-to-one for the surface code — a huge difference in how big a machine you need.">physical-to-logical ratio</button>
+<button class="cite" data-c="helios">Helios '25</button>. Oxford Ionics / IonQ have reported the highest gate fidelities of any platform (two-qubit ~99.99%) <button class="cite" data-c="ionq">IonQ '25</button>.</p>
+<p><b>Pros.</b> Highest demonstrated quality — accuracy and coherence — and the best (lowest) encoding ratio on the logical-qubit leaderboard. <b>Cons.</b> Slower gates, and laser/optics complexity has been the historic scaling bottleneck; pushing qubit counts high while keeping fidelity intact is the open question.</p>
+<div class="openclaim">
+<span class="tag">OPEN-UNVERIFIED</span><b>Forecast — Trapped ion: ~60%.</b> Highest demonstrated quality and encoding efficiency; the open question is scaling qubit count, not quality. <b>Signpost:</b> revises <i>up</i> if a chip-based ion system scales past hundreds of qubits with fidelity intact. Loose, independent odds (±~15 pts, mid-2026); ledger id <span class="mono">QCF2</span>.
+</div>
+
+<h3>Neutral atom (QuEra, Pasqal, Atom Computing)</h3>
+<p><b>Basis.</b> QuEra reported 96 logical qubits from 448 physical atoms with below-threshold error suppression — the current logical-qubit count leader <button class="cite" data-c="quera">QuEra '26</button>. Atom Computing crossed 1,000 physical atoms, and Pasqal has run ~1,000-atom systems <button class="cite" data-c="atom">Atom '23</button>.</p>
+<p><b>Pros.</b> Fastest recent progress; leads in error-corrected qubit count; atoms are identical by physics (no device-to-device variation), and connectivity is reconfigurable in software rather than fixed by lithography. <b>Cons.</b> A younger control/gate stack; gate speed and fidelity are still maturing relative to ions.</p>
+<div class="openclaim">
+<span class="tag">OPEN-UNVERIFIED</span><b>Forecast — Neutral atom: ~58%.</b> Fastest mover, leads on error-corrected qubit count, cheap identical atoms, software-defined connectivity; held back mainly by relative youth. <b>Signpost:</b> revises <i>up</i> with sustained large logical-qubit operation at higher fidelity. Loose, independent odds (±~15 pts, mid-2026); ledger id <span class="mono">QCF3</span>.
+</div>
+
+<h3>Silicon spin (Intel, Diraq, Silicon Quantum Computing, Quantum Motion, Equal1)</h3>
+<p><b>Basis.</b> Diraq with imec showed >99% two-qubit fidelity for silicon spin qubits on a standard 300 mm CMOS foundry line — and across multiple randomly chosen dies, not one hero device <button class="cite" data-c="diraq">Diraq/imec '25</button>. Silicon Quantum Computing reported ~99.99% two-qubit fidelity <button class="cite" data-c="sqc">SQC '25</button>.</p>
+<p><b>Pros.</b> The best manufacturing and scaling story of any avenue — it rides the existing semiconductor industry, in principle the cheapest path to millions of qubits — and it has now hit top-tier quality on an industrial line. <b>Cons.</b> The fewest qubits so far, and no logical-qubit demonstration yet on this modality. High variance.</p>
+<div class="openclaim">
+<span class="tag">OPEN-UNVERIFIED</span><b>Forecast — Silicon spin: ~45%.</b> Best manufacturing/scaling argument and freshly proven quality on a real foundry line, but the furthest to go on logical qubits — so the spread is wide. <b>Signpost:</b> revises <i>up</i> sharply with a first credible logical qubit built on silicon spin. Loose, independent odds (±~15 pts, mid-2026); ledger id <span class="mono">QCF4</span>.
+</div>
+
+<h3>Photonic (PsiQuantum, Xanadu, Quandela)</h3>
+<p><b>Basis.</b> Xanadu's Aurora — a 12-qubit modular, networked, room-temperature photonic machine built from 35 chips and ~13 km of fiber <button class="cite" data-c="aurora">Aurora '25</button> — plus on-chip generation of error-resistant GKP states <button class="cite" data-c="gkp">GKP '25</button>.</p>
+<p><b>Pros.</b> Room-temperature operation, and networking and modularity are native rather than bolted on; it rides silicon-photonics fabrication. <b>Cons.</b>
+<button class="term" data-d="Optical loss is light leaking out of the system — every imperfect component drops some photons. Because photonic qubits ARE photons, losing them loses the computation, and many photonic gates only succeed probabilistically. Driving loss low enough is the unsolved, make-or-break problem for this avenue.">Optical loss</button>
+is the make-or-break bottleneck and is not yet solved, and many gates are inherently probabilistic, demanding heavy redundancy.</p>
+<div class="openclaim">
+<span class="tag">OPEN-UNVERIFIED</span><b>Forecast — Photonic: ~35%.</b> Real, distinctive advantages (room temperature, native networking), but gated almost entirely by unsolved optical loss and probabilistic gates. <b>Signpost:</b> revises <i>up</i> materially if optical loss drops below the fault-tolerance threshold with a logical qubit demonstrated. Loose, independent odds (±~15 pts, mid-2026); ledger id <span class="mono">QCF5</span>. <i>See §03 — the author's thesis bets on exactly this.</i>
+</div>
+
+<h3>Topological (Microsoft)</h3>
+<p><b>Basis — and the dispute.</b> Microsoft presented Majorana 1 as 8 topological qubits and a hardware path toward a million-qubit chip <button class="cite" data-c="majorana">Majorana 1 '25</button>. This claim is <b>contested</b>: the accompanying peer reviewers noted the results do not by themselves constitute evidence for the underlying Majorana zero modes, and much of the physics community remains unconvinced that the device demonstrates a topological qubit at all <button class="cite" data-c="majoranaskeptic">skepticism '25</button>. A follow-up reports longer lifetimes but leaves the central physics question open.</p>
+<p><b>Pros.</b> If real, intrinsic hardware-level error protection — a potentially decisive scaling advantage, which is exactly why it is worth pursuing and exactly why the bar for "demonstrated" must stay high. <b>Cons.</b> The existence of the qubit itself is not yet accepted; this is a materials-science bet whose foundational claim is disputed.</p>
+<div class="openclaim">
+<span class="tag">OPEN-UNVERIFIED</span><b>Forecast — Topological: ~15%.</b> A bet on an unproven physics claim; low expected value precisely because the existence question is still open. <b>Signpost:</b> independent reproduction of an accepted topological qubit — which could collapse this toward 0 or jump it materially. Loose, independent odds (±~15 pts, mid-2026); ledger id <span class="mono">QCF6</span>.
+</div>
+
+<h3>Annealing / D-Wave — an aside, not ranked head-to-head</h3>
+<p>D-Wave's annealers are in commercial optimization use today — a real, already-banked win — but
+<button class="term" data-d="Quantum annealing is a special-purpose technique for optimization problems: it relaxes a system toward a low-energy answer. It is not universal, gate-based quantum computing, so it cannot run the general algorithms (like Shor's) that the rest of this dossier is about. It answers a different question.">annealing</button>
+is not universal gate-based computing, so it sits outside the fault-tolerance race this dossier scores. D-Wave has separately announced a gate-model roadmap (a small initial system, targeting 100 logical qubits by 2032 — the company's projection) <button class="cite" data-c="dwave">D-Wave '26</button>.</p>
+<div class="openclaim">
+<span class="tag">OPEN-UNVERIFIED</span><b>Forecast — D-Wave gate-model pivot: ~30%</b> (aside, not ranked against the six above). The present-day annealing business is a separate, already-banked success answering a different question. <b>Signpost:</b> revises <i>up</i> if the gate-model line delivers logical qubits on its roadmap. Loose (mid-2026); ledger id <span class="mono">QCF7</span>.
+</div>
+
+<h2><span class="num">03</span>The optical-versus-electronic question</h2>
+
+<p>There is a longer-range question underneath the avenue-by-avenue scoring: what is the eventual <i>substrate</i> of a mature quantum computer? The author's thesis — held with conviction after years of following this field — is that the long-term endpoint is <b>optical/photonic rather than electronic</b>: room-temperature operation and native networking are the properties a planetary-scale, interconnected quantum infrastructure will ultimately demand.</p>
+
+<p>Honesty requires flagging the tension directly. This thesis <b>runs ahead of the demonstrated evidence</b>. Today the evidence ranks photonic <i>lower</i> than the electronic avenues (~35%, §02), precisely because optical loss is unsolved. Conviction and demonstration are different columns of this ledger: the author's belief informs which question to chase; it does not get to set the photonic probability. The number moves when the evidence moves — not before.</p>
+
+<div class="openclaim">
+<span class="tag">OPEN-UNVERIFIED</span><b>Author thesis (tracked forecast):</b> the long-term endpoint of quantum computing is optical/photonic rather than electronic. Stated plainly as the author's conviction, currently <b>ahead of</b> the demonstrated evidence. <b>Signpost:</b> if photonic optical loss drops below the fault-tolerance threshold with a working logical qubit, the photonic probability (<span class="mono">QCF5</span>) revises up materially and this thesis gains ground. Ledger id <span class="mono">QCF8</span> — an open challenge: confirm, refute, or sharpen it, with named credit in the next version.
+</div>
+
+<p class="punch">No avenue has won. The job of this dossier is the honest separation of what has been demonstrated from what is being predicted — and to move the odds only when the evidence does.</p>
 
 <div class="publish-cta">
   <div class="pc-text">
@@ -160,7 +217,7 @@ Cite within deeper blocks the same way <button class="cite" data-c="ref2">Journa
 
 <footer>
   <b>About this edition:</b> this page is the complete paper in self-explaining form. The <a href="paper/manuscript.pdf">formal PDF</a> exists for tradition and archives; the <a href="index.html">interactive edition</a> carries the verification console; the <a href="dossier.html">audit trail</a> carries the receipts.
-  <br><br><span class="mono">An Open Dossier · CC BY 4.0 · AI-assistance: DESCRIBE YOUR USE and state your actual review basis · every verification label is true</span>
+  <br><br><span class="mono">An Open Dossier · CC BY 4.0 · AI-assistance: drafted by an AI agent under the author's direction from a Phase-0 prior-art map; the cited results are shown as reported and the primary-source citation audit is still pending; the per-avenue probabilities are the author's own loose forecasts, labeled OPEN-UNVERIFIED · every verification label is true</span>
 </footer>
 
 </div>
@@ -169,9 +226,20 @@ Cite within deeper blocks the same way <button class="cite" data-c="ref2">Journa
 // citation database — add an entry per chip:
 // KEY: {who:"Author(s) (Year)", what:"What they showed, 2 sentences, plain language.", src:"Journal Vol, Page"}
 const CITES = {
-  demo: {who:"This is a citation chip", what:"Tap any chip like this one and you get the source plus a two-sentence plain-language summary of what it actually showed — instead of a bare [7] sending you down a rabbit hole.", src:"You never leave the page."},
-  ref1: {who:"REPLACE — Author et al. (Year)", what:"REPLACE — what this source demonstrated, in plain language, and why it matters to this paper.", src:"Journal Vol, Page (Year)"},
-  ref2: {who:"REPLACE — Author et al. (Year)", what:"REPLACE.", src:"Journal Vol, Page (Year)"}
+  demo: {who:"How a source chip works", what:"Tap any chip and you get who the source is, what it reported in two sentences, and where it appeared — no rabbit hole. Note: in this dossier the citation audit is still pending, so chips show reported claims, not yet independently verified ones.", src:"You never leave the page."},
+  willow: {who:"Google Quantum AI (2024)", what:"Reported that the 105-qubit Willow processor achieved below-threshold error correction, with logical error falling as code distance grew from 3 to 5 to 7 under real-time decoding. Reported about 0.14% logical error per cycle at distance 7.", src:"Nature (2024) — reported, audit pending"},
+  condor: {who:"IBM (2023)", what:"Reported the 1,121-physical-qubit Condor chip, after which IBM shifted emphasis to smaller, higher-quality modular processors (Heron, Nighthawk). A scale milestone in physical qubits, not logical ones.", src:"IBM roadmap / vendor — reported, audit pending"},
+  helios: {who:"Quantinuum (2025)", what:"Reported Helios running 98 physical barium ions at ~99.92% two-qubit fidelity across all pairs, yielding 48 logical qubits at roughly a 2:1 physical-to-logical ratio. A leading result on logical-qubit encoding efficiency.", src:"Quantinuum / aggregator — reported, audit pending"},
+  ionq: {who:"Oxford Ionics / IonQ (2025)", what:"Reported the highest gate fidelities of any platform, with two-qubit fidelity around 99.99%. Quality records rather than scale records.", src:"Vendor / aggregator — reported, audit pending"},
+  quera: {who:"QuEra (2026)", what:"Reported 96 logical qubits from 448 physical atoms with below-threshold error suppression — the current leader in error-corrected qubit count. A neutral-atom result.", src:"Nature (2026) — reported, audit pending"},
+  atom: {who:"Atom Computing / Pasqal (2023)", what:"Reported neutral-atom systems crossing ~1,000 physical atoms. A scale milestone in physical qubits.", src:"Vendor / aggregator — reported, audit pending"},
+  diraq: {who:"Diraq with imec (2025)", what:"Reported >99% two-qubit fidelity for silicon spin qubits fabricated on a standard 300 mm CMOS foundry line, and crucially across multiple randomly selected dies rather than one hero device. Evidence that quality and manufacturability can coexist.", src:"Nature (2025) — reported, audit pending"},
+  sqc: {who:"Silicon Quantum Computing (2025)", what:"Reported ~99.99% two-qubit fidelity for silicon spin qubits. A top-tier quality result for the modality.", src:"Reported, audit pending"},
+  aurora: {who:"Xanadu (2025)", what:"Reported Aurora, a 12-qubit modular, networked, room-temperature photonic machine built from 35 chips and ~13 km of fiber. A demonstration of native modularity and networking.", src:"Nature (2025) — reported, audit pending"},
+  gkp: {who:"Xanadu (2025)", what:"Reported on-chip generation of error-resistant GKP states, a key building block for photonic error correction. A component result, not a full machine.", src:"Reported, audit pending"},
+  majorana: {who:"Microsoft (2025)", what:"Presented Majorana 1 as 8 topological qubits and a hardware path toward a million-qubit chip. The claim is contested — see the skepticism chip.", src:"Vendor + Nature — reported, contested, audit pending"},
+  majoranaskeptic: {who:"Independent physicists / peer reviewers (2025)", what:"Noted that Microsoft's results do not by themselves constitute evidence for Majorana zero modes, and that much of the community is unconvinced a topological qubit was demonstrated. The existence question remains open.", src:"APS Physics / Science (2025) — reported, audit pending"},
+  dwave: {who:"D-Wave (2026)", what:"Announced a gate-model roadmap alongside its commercial annealing business, targeting an initial small system and 100 logical qubits by 2032. A vendor projection, not a demonstrated result.", src:"Business Wire / vendor — reported, audit pending"}
 };
 // one shared toggle behavior for terms and citations
 function closeCard(btn){ const c = btn._card; if(c){ c.remove(); btn._card = null; btn.setAttribute('aria-expanded','false'); } }
