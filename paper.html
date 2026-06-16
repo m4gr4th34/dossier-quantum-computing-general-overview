@@ -135,7 +135,7 @@ quantum computing on a roughly <b>10–15 year horizon</b>. An avenue that produ
 
 <h2><span class="num">02</span>The avenues</h2>
 
-<p>Seven gate-model avenues, plus an annealing aside that answers a different question. For each: the demonstrated basis, the case for and against, then the forecast box. Where a date or milestone comes from a company's own roadmap rather than an independent result, it is attributed to the vendor and labeled as a projection.</p>
+<p>Eight gate-model avenues, plus an annealing aside that answers a different question. For each: the demonstrated basis, the case for and against, then the forecast box. Where a date or milestone comes from a company's own roadmap rather than an independent result, it is attributed to the vendor and labeled as a projection.</p>
 
 <h3>Superconducting (Google, IBM, Rigetti, IQM)</h3>
 <p><b>Basis.</b> Google's Willow processor (105 physical qubits) demonstrated
@@ -165,7 +165,7 @@ overhead is heavy (hundreds-to-thousands of physical qubits per logical qubit), 
 </div>
 
 <h3>Silicon spin (Intel, Diraq, Silicon Quantum Computing, Quantum Motion, Equal1)</h3>
-<p><b>Basis.</b> Diraq with imec showed >99% two-qubit fidelity for silicon spin qubits on a standard 300 mm CMOS foundry line — and across multiple randomly chosen dies, not one hero device <button class="cite" data-c="diraq">Diraq/imec '25</button>. Silicon Quantum Computing reported ~99.99% two-qubit fidelity <button class="cite" data-c="sqc">SQC '25</button>.</p>
+<p><b>Basis.</b> Diraq with imec showed >99% two-qubit fidelity for silicon spin qubits on a standard 300 mm CMOS foundry line — and across multiple randomly chosen dies, not one hero device <button class="cite" data-c="diraq">Diraq/imec '25</button>. Silicon Quantum Computing reported ~99.99% two-qubit fidelity <button class="cite" data-c="sqc">SQC '25</button>. These silicon spin qubits <b>are quantum-dot qubits</b> — the electron's spin is held in an electrostatically-defined quantum dot in the semiconductor — so this avenue <i>is</i> the "quantum-dot computing" approach under its more specific name.</p>
 <p><b>Pros.</b> The best manufacturing and scaling story of any avenue — it rides the existing semiconductor industry, in principle the cheapest path to millions of qubits — and it has now hit top-tier quality on an industrial line. <b>Cons.</b> The fewest qubits so far, and no logical-qubit demonstration yet on this modality. High variance.</p>
 <div class="openclaim">
 <span class="tag">OPEN-UNVERIFIED</span><b>Forecast — Silicon spin: ~45%.</b> Best manufacturing/scaling argument and freshly proven quality on a real foundry line, but the furthest to go on logical qubits — so the spread is wide. <b>Signpost:</b> revises <i>up</i> sharply with a first credible logical qubit built on silicon spin. Loose, independent odds (±~15 pts, mid-2026); ledger id <span class="mono">QCF4</span>.
@@ -178,6 +178,13 @@ overhead is heavy (hundreds-to-thousands of physical qubits per logical qubit), 
 is the make-or-break bottleneck and is not yet solved, and many gates are inherently probabilistic, demanding heavy redundancy.</p>
 <div class="openclaim">
 <span class="tag">OPEN-UNVERIFIED</span><b>Forecast — Photonic: ~35%.</b> Real, distinctive advantages (room temperature, native networking), but gated almost entirely by unsolved optical loss and probabilistic gates. <b>Signpost:</b> revises <i>up</i> materially if optical loss drops below the fault-tolerance threshold with a logical qubit demonstrated. Loose, independent odds (±~15 pts, mid-2026); ledger id <span class="mono">QCF5</span>. <i>See §03 — the author's thesis bets on exactly this.</i>
+</div>
+
+<h3>III-V quantum dots (optically-active / photon sources)</h3>
+<p><b>Basis.</b> Dots made from compound (III-V) semiconductors — typically indium arsenide or gallium arsenide — that emit single photons on demand and can host a spin that interfaces with light; Quandela is a representative builder. <i>(Distinct from the silicon-spin dots above: those trap a spin to compute</i> in <i>the chip; these are optical, emitting photons that feed photonic and network architectures.)</i></p>
+<p><b>Pros.</b> Among the best on-demand single-photon sources available — high purity and indistinguishability — plus a natural spin-photon interface, which makes them strong as inputs to photonic computing and as nodes for quantum networking. <b>Cons.</b> Dot-to-dot variability (each grown dot differs slightly), and they function more as a component feeding photonic/network architectures than as a self-contained general processor.</p>
+<div class="openclaim">
+<span class="tag">OPEN-UNVERIFIED</span><b>Forecast — III-V quantum dots: ~10–12%.</b> The physics is strong, but as a route to a <i>general</i> fault-tolerant computer it is weak — dot-to-dot variability, and they act as a <b>component</b> feeding photonic/network architectures rather than a self-contained processor. As with NV, this ~10–12% measures the fault-tolerant, useful-scale <b>computing</b> question specifically; it is <i>not</i> a judgement that the technology is weak — its real strength is as a best-in-class photon source and spin-photon network interface, a different lane this number does not measure. <b>Signpost:</b> revises <i>up</i> with a credible scalable processor architecture built on III-V quantum dots — not merely an improved photon-source benchmark. Loose, independent odds (±~15 pts, mid-2026); ledger id <span class="mono">QCF10</span>.
 </div>
 
 <h3>Topological (Microsoft)</h3>
@@ -199,7 +206,7 @@ is the make-or-break bottleneck and is not yet solved, and many gates are inhere
 <button class="term" data-d="Quantum annealing is a special-purpose technique for optimization problems: it relaxes a system toward a low-energy answer. It is not universal, gate-based quantum computing, so it cannot run the general algorithms (like Shor's) that the rest of this dossier is about. It answers a different question.">annealing</button>
 is not universal gate-based computing, so it sits outside the fault-tolerance race this dossier scores. D-Wave has separately announced a gate-model roadmap (a small initial system, targeting 100 logical qubits by 2032 — the company's projection) <button class="cite" data-c="dwave">D-Wave '26</button>.</p>
 <div class="openclaim">
-<span class="tag">OPEN-UNVERIFIED</span><b>Forecast — D-Wave gate-model pivot: ~30%</b> (aside, not ranked against the seven above). The present-day annealing business is a separate, already-banked success answering a different question. <b>Signpost:</b> revises <i>up</i> if the gate-model line delivers logical qubits on its roadmap. Loose (mid-2026); ledger id <span class="mono">QCF7</span>.
+<span class="tag">OPEN-UNVERIFIED</span><b>Forecast — D-Wave gate-model pivot: ~30%</b> (aside, not ranked against the eight above). The present-day annealing business is a separate, already-banked success answering a different question. <b>Signpost:</b> revises <i>up</i> if the gate-model line delivers logical qubits on its roadmap. Loose (mid-2026); ledger id <span class="mono">QCF7</span>.
 </div>
 
 <h2><span class="num">03</span>The optical-versus-electronic question</h2>
