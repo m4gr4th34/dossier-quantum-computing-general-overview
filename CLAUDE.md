@@ -112,7 +112,7 @@ labeled one is not.**
   resolves it true or refuted.
 
 ## What this project is
-The strategy room for **Dossier [NNN / short-name]: [ONE-LINE TOPIC]**.
+The strategy room for **Dossier QC-Landscape: Which quantum-computing modalities (superconducting, trapped-ion, neutral-atom, photonic, topological, silicon spin, etc.) have the most credible path to fault-tolerant, useful-scale computing — and how should each avenue's probability of success be labeled given current evidence?**.
 Connected repo: this synced repository. The dossier's three reading
 surfaces (interactive, self-explaining, audit trail), its manuscript, its
 verification script, and its claim ledger all live here.
