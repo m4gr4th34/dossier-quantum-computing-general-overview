@@ -1,0 +1,19 @@
+{
+  "avenues": [
+    {"name": "Superconducting", "thesis": "Most mature at scale; Google's Willow showed below-threshold error correction. Heavy surface-code overhead and chip-to-chip interconnect are the scaling frontier.", "status": "OPEN-UNVERIFIED", "forecast": 70, "signpost": "up if modular interconnect and logical scaling keep working; down if surface-code overhead proves intractable", "cites": ["willow", "condor"]},
+    {"name": "Trapped ion", "thesis": "Highest demonstrated gate quality and the best (lowest) physical-to-logical ratio; scaling qubit count is the open question.", "status": "OPEN-UNVERIFIED", "forecast": 60, "signpost": "up if a chip-based ion system scales past hundreds of qubits with fidelity intact", "cites": ["helios", "ionq"]},
+    {"name": "Neutral atom", "thesis": "Fastest-rising; leads in error-corrected qubit count with cheap identical atoms and software-defined connectivity; a younger control stack.", "status": "OPEN-UNVERIFIED", "forecast": 58, "signpost": "up if sustained large logical-qubit operation at higher fidelity is demonstrated", "cites": ["quera", "atom"]},
+    {"name": "Silicon spin", "thesis": "The quantum-dot computing approach: best manufacturing/scaling story and freshly proven quality on a foundry line, but fewest qubits and no logical qubit yet.", "status": "OPEN-UNVERIFIED", "forecast": 45, "signpost": "up if a first credible logical qubit is built on silicon spin", "cites": ["diraq", "sqc"]},
+    {"name": "Photonic", "thesis": "Room-temperature and natively networked, but gated almost entirely by unsolved optical loss and probabilistic gates.", "status": "OPEN-UNVERIFIED", "forecast": 35, "signpost": "up if optical loss drops below the fault-tolerance threshold with a logical qubit demonstrated", "cites": ["aurora", "gkp"]},
+    {"name": "III-V quantum dots", "thesis": "Optically-active compound-semiconductor dots (~10-12%): best-in-class photon sources and spin-photon interfaces — a component for photonic/network architectures more than a self-contained processor.", "status": "OPEN-UNVERIFIED", "forecast": null, "signpost": "up if a credible scalable processor architecture built on III-V quantum dots appears (not merely an improved photon-source benchmark)", "cites": []},
+    {"name": "Topological", "thesis": "A bet on an unproven physics claim — the existence of the qubit itself is contested; intrinsic hardware-level error protection if it is real.", "status": "OPEN-UNVERIFIED", "forecast": 15, "signpost": "independent reproduction of an accepted topological qubit; could collapse toward 0 or jump materially", "cites": ["majorana", "majoranaskeptic"]},
+    {"name": "NV centers", "thesis": "Room-temperature diamond defect, superb for sensing/networking; very hard to scale into large, connected general-purpose processors.", "status": "OPEN-UNVERIFIED", "forecast": 12, "signpost": "up if a credible multi-qubit error-corrected NV processor architecture with a real scaling path appears (not another sensing/networking milestone)", "cites": []}
+  ],
+  "checks": {
+    "_comment": "Single source of truth for the consistency-check RULES. Both index.html's console and verification/verify_numbers.py read these, so a threshold can never drift between the page and the verifier. Change a rule HERE and both sides enforce it on next run. (The check LOGIC is still written in each language — see AUTHORING.md — but the rules it enforces live only here.)",
+    "min_avenues": 1,
+    "forecast_signpost_required": true,
+    "forecast_pct_min": 0,
+    "forecast_pct_max": 100
+  }
+}
