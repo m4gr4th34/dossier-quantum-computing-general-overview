@@ -25,7 +25,41 @@ Any edit to a number updates all three in the same commit. When a check
 fails: **fix the paper, never widen the tolerance.** The tolerances in the
 checks are exactly what the manuscript states — not padded.
 
+**Known limitation (and roadmap).** The survey scaffold single-sources its avenue
+**data** AND its consistency-check **rules** via `avenues.json` — both read by
+`index.html` and `verification/verify_numbers.py`. The avenue list lives in
+the `avenues` block of `avenues.json`; the check thresholds (minimum avenue
+count, whether a FORECAST signpost is mandatory, the forecast probability
+bounds) live in its `checks` block. Change a rule there and the page and the
+verifier both
+enforce it on next run — a threshold can no longer drift between them.
+
+What is still written in each language is the check **logic itself** — the few
+lines that filter forecasts, count signposts, and compare against the rules.
+These are near-trivial and rarely change, and unifying them across Python and JS
+would require codegen or a declarative check-DSL that, for three invariants,
+would be harder to read than the code it replaces. So the residual is small and
+named: if you add a genuinely new *kind* of check (not just a new threshold),
+write it in both `buildChecks()` (index.html) and `verify_numbers.py`, and put
+any new threshold it needs in the `checks` block of `avenues.json` so that part
+stays single-sourced. Full logic unification stays the roadmap direction only if the checks
+proliferate. (The manuscript prose and claim ledger are still hand-synced too;
+every numeric edit touches all of them in one commit.)
+
 ---
+
+## Choosing the shape: survey (default) or single-result
+
+Most dossiers are surveys — you scope a field before you dive — so the scaffold
+ships **survey-shaped by default**: `index.html` renders the avenue landscape
+from the canonical `avenues.json`, and both the consistency console and
+`verification/verify_numbers.py` read that **same file**, so the data can't
+drift between page and verifier. A focused **single-result** finding uses the
+documented alternate instead: the slider-explorer / live-headline / presets
+block, preserved as an OPTIONAL comment in `index.html` — Dossier 001 is the
+worked example of that shape. State plainly in your project which shape you're
+using; the editions, the console, and the verifier all follow from that one
+choice.
 
 ## Surface 1 — The formal manuscript (`paper/manuscript.tex`)
 
@@ -37,6 +71,11 @@ Start from `paper/manuscript-template.tex`. Conventions:
   claims with ledger status OPEN-UNVERIFIED must hedge ("is expected to",
   "we conjecture") AND state in the text that the claim is open, labeled,
   and invited as a community contribution.
+- **FORECAST claims** are a distinct claim TYPE (not a status): a labeled author
+  estimate — subjective probability or judgment — with stated reasoning and a
+  mandatory dated, falsifiable signpost. There is no executable check; the
+  signpost IS the verifier. Phrase it as an estimate, never a result, and carry
+  ledger status OPEN-UNVERIFIED until the signpost date resolves it true/refuted.
 - A `Relation to prior work` section explicitly separates established /
   adjacent / new, with "to the best of our knowledge" phrasing on novelty.
 - A `Reproducibility` section (mandatory boilerplate in the template)
@@ -202,18 +241,20 @@ never auto-applied by a template sync.
 
 **Publish CTA — keep it canonical.** The publish-like-this CTA band (before the footer on index.html, paper.html, and dossier.html) intentionally points at the canonical open-dossier-template's GETTING-STARTED.md — the instructions-first front door — not at this dossier's own repo and not at the template's repo root. Every dossier funnels new authors straight into the step-by-step guide. Leave these URLs as the canonical GETTING-STARTED.md.
 
-## The Project constitution (`PROJECT-INSTRUCTIONS.md`)
+## The Project constitution (`CLAUDE.md`)
 
 For authors who run a dossier as a Claude Project (the optional power-path in
-GETTING-STARTED.md), the repo ships **`PROJECT-INSTRUCTIONS.md`** — a versioned
-"constitution" the Project's Instructions point at with one line: *"Read
-PROJECT-INSTRUCTIONS.md in the synced repo and follow it…"*. It is deliberately
-**parallel to `CLAUDE.md`**: the same doctrine, binding the strategy-room chat
-the way `CLAUDE.md` binds Claude Code. Treat it as machinery — per dossier, fill
-in only its `[TOPIC]` line and Standing-context list; everything else is shared
-doctrine, upgraded via the template-machinery sync (it's on the machinery list
-in the README's Rituals section). If you revise your working rules, update both
-`CLAUDE.md` and `PROJECT-INSTRUCTIONS.md` so the two rooms stay in lockstep.
+GETTING-STARTED.md), **`CLAUDE.md` is the single constitution** — the one file
+that binds both rooms. Claude Code reads it automatically every session, and the
+Project's Instructions point at the same file with one line: *"Read CLAUDE.md in
+the synced repo and follow it…"*. Treat it as machinery — per dossier, fill in
+only its `## What this project is` topic line and its `## Standing context`
+list; everything else is shared doctrine, upgraded via the template-machinery
+sync (it's on the machinery list in the README's Rituals section).
+**`PROJECT-INSTRUCTIONS.md`** is now only a back-compat redirect with no
+doctrine of its own — it exists so older Projects whose Instructions still point
+at it keep working; new Projects point straight at `CLAUDE.md`. There is no
+second copy to keep in lockstep: revise your working rules in `CLAUDE.md` alone.
 
 ## Design identity (do not reinvent)
 

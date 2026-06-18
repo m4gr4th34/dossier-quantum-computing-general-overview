@@ -9,8 +9,8 @@
   @import url('https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,600;0,800;1,400;1,600&family=IBM+Plex+Mono:wght@400;600&display=swap');
   :root{
     --ink:#101d26;--ink2:#42525c;--paper:#f6f8f9;--card:#ffffff;
-    --teal:#0e7c7b;--teal-soft:#e3f0f0;--coral:#e4572e;--violet:#6b4e9b;--violet-soft:#efe9f6;
-    --pass:#1e8e5a;--open:#b07d1f;--line:#d8e0e4;
+    --teal:#0e7c7b;--teal-soft:#e3f0f0;--coral:#e4572e;--coral-soft:#fbe9e3;--violet:#6b4e9b;--violet-soft:#efe9f6;
+    --pass:#1e8e5a;--open:#b07d1f;--open-soft:#fdf6e9;--line:#d8e0e4;
     --serif:'Spectral',Georgia,serif;
     --mono:'IBM Plex Mono',ui-monospace,Menlo,Consolas,monospace;
     --sans:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
@@ -57,8 +57,20 @@
   details.deeper .body{padding:0 15px 14px;font-size:15px;color:var(--ink2)}
   details.deeper .eq{font-family:var(--mono);font-size:14px;background:var(--paper);padding:10px 12px;margin:8px 0;overflow-x:auto}
 
-  .openclaim{background:#fdf6e9;border:1px solid var(--open);border-left:5px solid var(--open);padding:14px 16px;margin:18px 0;font-size:15.5px}
-  .openclaim .tag{font-family:var(--mono);font-size:11px;color:var(--open);border:1px solid var(--open);padding:2px 7px;margin-right:8px}
+  /* ===== honest-label callouts at the claim site =====
+     One per survey status that needs a visible home in prose:
+       .openclaim  amber   OPEN-UNVERIFIED  (the author's own open claim)
+       .forecast   violet  FORECAST         (labeled estimate + dated signpost)
+       .reported   coral   REPORTED         (interested-party / not independently reproduced)
+     ESTABLISHED needs no box — it is asserted plainly, with citations. */
+  .openclaim,.forecast,.reported{padding:14px 16px;margin:18px 0;font-size:15.5px;border:1px solid;border-left-width:5px}
+  .openclaim{background:var(--open-soft);border-color:var(--open)}
+  .forecast{background:var(--violet-soft);border-color:var(--violet)}
+  .reported{background:var(--coral-soft);border-color:var(--coral)}
+  .openclaim .tag,.forecast .tag,.reported .tag{font-family:var(--mono);font-size:11px;padding:2px 7px;margin-right:8px;border:1px solid}
+  .openclaim .tag{color:var(--open);border-color:var(--open)}
+  .forecast .tag{color:var(--violet);border-color:var(--violet)}
+  .reported .tag{color:var(--coral);border-color:var(--coral)}
   .punch{font-family:var(--serif);font-style:italic;font-size:20px;border-left:4px solid var(--coral);padding:6px 0 6px 16px;margin:26px 0;max-width:60ch}
   footer{margin-top:56px;padding:22px 0 60px;border-top:3px solid var(--ink);font-size:14px;color:var(--ink2)}
   .mono{font-family:var(--mono)}
@@ -441,7 +453,7 @@ function toggle(btn, html, extraClass){
   card.className = 'popcard' + (extraClass ? ' ' + extraClass : '');
   card.innerHTML = html;
   // insert after the end of the current paragraph-level parent for clean layout
-  const block = btn.closest('p, .howto, .body, .openclaim') || btn.parentNode;
+  const block = btn.closest('p, .howto, .body, .openclaim, .forecast, .reported') || btn.parentNode;
   block.insertAdjacentElement('afterend', card);
   btn._card = card; btn.setAttribute('aria-expanded','true');
 }
