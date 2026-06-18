@@ -130,15 +130,160 @@ The **draft-preview banner** at the top of the README is present **by default** 
 
 ### Syncing template improvements into an existing dossier
 
-Port the latest template improvements into an existing dossier. This is the subtle one, because a filled-in dossier and the template share machinery but not content, and a naive copy would bulldoze your paper. The instruction encodes that distinction:
+Port the latest template improvements into a dossier you've already filled in.
+A naive copy would bulldoze your paper, so the ritual sorts every upstream
+change into **three buckets**:
+
+1. **Machinery** — workflows, the format spec, shared docs, `verify.html`, and
+   the CSS/JS *plumbing* of the editions. These carry no authored meaning, so
+   they port wholesale (after you review the diff).
+2. **Content** — your prose, your claim-ledger rows, your dossier's real
+   verification checks and data, your manuscript, your timestamps. The sync
+   **never touches these.**
+3. **Structural migrations** — changes that are machinery in *intent* but can
+   only be adopted by **editing authored content** into a new shape (e.g. moving
+   data into a new single-source file, or relabeling ledger rows under a new
+   claim type). These are **never auto-applied.** Each is identified, presented
+   to you as a named yes/no decision, and — if you approve it — executed as its
+   **own separate, separately-reviewed commit**, never folded into the machinery
+   port.
+
+The first two buckets are a clean copy-or-skip. The third is where judgment
+lives, and it's the bucket a one-line "copy machinery, skip content" rule gets
+wrong — because a structural migration *looks* like machinery (it ships in the
+template) but *behaves* like content (adopting it rewrites your paper). When in
+doubt about which bucket a change is in, treat it as a migration and ask.
+
+**Shape first.** Before anything else, the ritual establishes whether your
+dossier is **survey-shaped** or **single-result**, because a chunk of the
+template's machinery (the `avenues.json` landscape, the survey console, the
+survey-consistency verifier) only applies to surveys. On a single-result
+dossier those aren't migrations to do later — they're **not applicable**, and
+the ritual skips them and ports only the shape-neutral machinery. This is the
+difference between a single-result sync hitting one clean "skip the survey
+parts" and hitting three confusing "stop and ask" flags.
+
+Paste this to your agent:
 
 ```
-In the dossier-NNN clone: fetch the latest m4gr4th34/open-dossier-template into a temporary folder and compare it against this repo. Apply template-side improvements to MACHINERY ONLY: everything in .github/workflows/, the format spec at verification/research_pipeline.md, the shared production playbook AUTHORING.md, the shared deployment guide DEPLOY.md, the shared onboarding docs GETTING-STARTED.md and GETTING-STARTED-GENERIC.md, the doctrine sections of CLAUDE.md and PROJECT-INSTRUCTIONS.md (preserving each file's "Standing context" section untouched) — including the shared verification-label vocabulary such as EXPLORATORY-CONJECTURE — the shared verification-explainer page verify.html (entirely machinery), and any CSS/JavaScript machinery changes in index.html, paper.html, and dossier.html — but never touch this repo's content: section text, terms, citation chips and CITES entries, checks in verify_numbers.py, claim_ledger.csv rows, manuscript files, or anything in timestamps/. Show me the full diff of what you propose before committing. Then commit as "Port template machinery updates [date]" and push. If any machinery change conflicts with local content edits, stop and ask me instead of guessing.
+Sync this dossier to the latest Open Dossier template by its three-bucket
+ritual. DISCOVERY + MACHINERY first; structural migrations are separate,
+approved passes. Plain commits only — NO tag/release (don't trigger
+Zenodo/OpenTimestamps). Show me the full diff before EVERY commit. STOP and
+ask rather than guess on any conflict.
+
+STEP 1 — CHANGELOG (cheap if we've synced before).
+- Read template-sync.json in this repo. If it records synced_from_commit,
+  clone the template shallow into a temp dir and run
+  `git log <synced_from_commit>..HEAD --oneline` to get the EXACT list of
+  upstream changes since our last sync. If there's no template-sync.json (first
+  sync under this ritual), do a full file-by-file compare instead.
+- Template lives at https://github.com/m4gr4th34/open-dossier-template (clone to
+  a TEMP folder; do NOT add it as a remote, do NOT merge). 
+- Report the changelog before doing anything else.
+
+STEP 2 — SHAPE. State whether this dossier is SURVEY-shaped or SINGLE-RESULT
+(check index.html: an avenue landscape reading avenues.json = survey; a slider
+explorer + headline number = single-result). This routes the survey-specific
+machinery in Step 3.
+
+STEP 3 — MACHINERY (bucket 1: port after I see the diff). Apply upstream changes
+to machinery ONLY:
+  - everything in .github/workflows/
+  - verification/research_pipeline.md (format spec, incl. label/claim-type
+    vocabulary like EXPLORATORY-CONJECTURE and FORECAST — adopting a DEFINITION
+    is machinery; relabeling YOUR rows is a migration, see Step 4)
+  - AUTHORING.md, DEPLOY.md, GETTING-STARTED.md, GETTING-STARTED-GENERIC.md
+  - verify.html (entirely machinery)
+  - the doctrine/operating sections of CLAUDE.md, PRESERVING its "## Standing
+    context" section untouched
+  - CSS/JS *machinery* hunks in index.html, paper.html, dossier.html
+  - IF SURVEY-shaped: also the survey console/verifier machinery and the
+    structure of avenues.json. IF SINGLE-RESULT: SKIP all survey-specific
+    machinery (avenues.json, the survey console, the survey verifier) — not
+    applicable to this shape.
+NEVER touch (bucket 2): paper.html section text / terms / citation chips & CITES,
+claim_ledger.csv rows, the real checks in verify_numbers.py, your avenue DATA if
+survey-shaped (the rows inside avenues.json are content), paper/ manuscript
+files, anything in timestamps/, and LICENSE.md.
+Show me the full machinery diff. On approval, commit as
+"Port template machinery updates [DATE]" — plain commit, no tag.
+
+STEP 4 — STRUCTURAL MIGRATIONS (bucket 3: identify, don't apply). From the Step 1
+changelog, identify any change that would require editing authored content to
+adopt. Do NOT apply any of them. For each, consult "Structural migrations" in
+the template README and present it to me as a named yes/no decision with its
+procedure and whether it's safe to defer. The currently-known ones:
+  - avenues.json single-source adoption (only relevant if survey-shaped)
+  - constitution collapse (CLAUDE.md becomes the single constitution;
+    PROJECT-INSTRUCTIONS.md becomes a redirect)
+  - EST -> FORECAST ledger relabeling
+Execute ONLY the migrations I approve, each as its OWN separate commit with its
+own diff shown first. The constitution-collapse migration has a hard rule: if
+PROJECT-INSTRUCTIONS.md's Standing context differs from CLAUDE.md's, STOP and ask
+me which is canonical — never silently drop a filled-in Standing context.
+
+STEP 5 — STAMP + VERIFY. After the machinery commit, write template-sync.json
+with the template repo URL, the upstream HEAD commit you synced from, and today's
+date (this makes the next sync's changelog a one-line range). Confirm authored
+content survived (paper.html sections and CITES intact, every ledger row present,
+paper/ and timestamps/ untouched) and that `python3 verification/verify_numbers.py`
+exits 0. Report, then we're done.
 ```
 
-LICENSE.md is intentionally excluded — your license is your choice; sync never overwrites it.
+LICENSE.md is intentionally excluded — your license is your choice; sync never
+overwrites it.
 
-The diff-before-commit and stop-on-conflict clauses are the safety rails — you stay the editor-in-chief of every port.
+#### Structural migrations (the third bucket — reference)
+
+A template change is a **structural migration**, not plain machinery, when
+adopting it requires **editing authored content into a new shape**. It ships in
+the template like machinery, but you can't take it without touching your paper,
+your ledger, or your real checks — so it's never auto-applied. The handling is
+always the same: identify it, present it as a named decision, and if approved,
+do it as a separate reviewed commit. New migrations get added to this list as
+the template evolves; the *category* is what matters, so a migration we haven't
+catalogued yet still has a home and a handling rule instead of becoming a
+mystery "stop and ask."
+
+**Migration A — `avenues.json` single-source (survey dossiers only).**
+*When it applies:* your dossier is survey-shaped and predates the canonical
+`avenues.json`. *Why it's a migration:* your avenue data currently lives as
+authored prose and ledger rows; adopting the single-source means lifting that
+data into `avenues.json` and pointing the console and verifier at it.
+*Procedure:* extract each avenue (name, status, forecast %, signpost, cites)
+into `avenues.json`; switch index.html's console and `verify_numbers.py` to the
+survey-consistency versions that read it; reconcile against the prose/ledger so
+nothing contradicts. *Safe to defer?* Yes. *Skip entirely?* Yes, if the dossier
+is single-result — it doesn't apply at all.
+
+**Migration B — constitution collapse (CLAUDE.md becomes the single source).**
+*When it applies:* your dossier still has the old dual-file shape, where doctrine
+and Standing context are mirrored across `CLAUDE.md` and `PROJECT-INSTRUCTIONS.md`.
+*Why it's a migration:* the template now keeps ONE constitution in `CLAUDE.md`
+and demotes `PROJECT-INSTRUCTIONS.md` to a back-compat redirect with no doctrine
+and no Standing context — so adopting it deletes a section from a file that may
+hold authored content. *Procedure:* merge any doctrine the upstream `CLAUDE.md`
+adds (machinery), keep `CLAUDE.md`'s Standing context, then replace
+`PROJECT-INSTRUCTIONS.md`'s body with the redirect stub. **Hard rule:** if the
+Standing context in `PROJECT-INSTRUCTIONS.md` differs in any way from the one in
+`CLAUDE.md`, STOP and ask which is canonical before demoting — never silently
+drop a filled-in Standing context. *Safe to defer?* Yes (low-urgency), but do it
+eventually so the two rooms can't drift. *Note:* existing Project Instructions
+keep pointing at `PROJECT-INSTRUCTIONS.md`; the redirect keeps them working with
+no change on your side.
+
+**Migration C — `EST` -> `FORECAST` ledger relabeling.**
+*When it applies:* the template added the `FORECAST` claim type and your ledger
+labels subjective forward judgments as `EST`. *Why it's a migration:* the
+*definition* of FORECAST ports as machinery (Step 3), but converting your rows is
+a content edit — and not a find-replace: a FORECAST **requires a dated,
+falsifiable signpost** (the doctrine: a forecast without one is just an opinion
+with a number on it), so each converted row needs a real signpost written for it.
+*Procedure:* for each `EST` row that is actually a forward judgment, change the
+type to `FORECAST` and add its mandatory dated signpost; leave genuine non-
+forecast `EST` rows alone. *Safe to defer?* Yes — `EST` rows aren't false, just
+less precise. Do it as a deliberate authoring pass when you're ready.
 
 ---
 
